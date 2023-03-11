@@ -11,8 +11,8 @@ endif
 CFLAGS_P=$(CFLAGS) -pg -static -DCONFIG_TCC_STATIC
 LIBS_P=
 
-# these options not supported by gcc on arm architecture
-ifneq ($(ARCH),arm)
+# these options are not supported by gcc on arm* architectures
+ifeq (,$(findstring arm,$(ARCH)))
 # -m32 option sets "int", "long", and pointer types to 32 bits, and generates code for the x86-64 architecture.  Workaround for old tcc making assumptions about undefined behaviour in C.
 CFLAGS+=-m32
 CFLAGS+=-mpreferred-stack-boundary=4
